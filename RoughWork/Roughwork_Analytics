@@ -1,0 +1,71 @@
+|-- user_id: string (nullable = true)
+|-- event_date: string (nullable = true)
+|-- category: string (nullable = true)
+|-- mobile_brand_name: string (nullable = true)
+|-- mobile_model_name: string (nullable = true)
+|-- mobile_os_hardware_model: string (nullable = true)
+|-- operating_system: string (nullable = true)
+|-- operating_system_version: string (nullable = true)
+|-- city: string (nullable = true)
+|-- country: string (nullable = true)
+|-- appversion: string (nullable = true)
+|-- cryear: integer (nullable = true)
+|-- crmonth: integer (nullable = true)
+|-- crday: integer (nullable = true)
+|-- processed_at: timestamp (nullable = true)
+
+
+CREATE EXTERNAL TABLE IF NOT EXISTS creditbook_sourcelayer.analytics_details (
+    user_id STRING,
+    event_date STRING,
+    category STRING,
+    mobile_brand_name STRING,
+    mobile_model_name STRING,
+    mobile_os_hardware_model STRING,
+    operating_system STRING,
+    operating_system_version STRING,
+    city STRING,
+    country STRING,
+    appversion STRING,
+    processed_at timestamp
+    )
+partitioned by (cryear INT,crmonth INT,crday INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS PARQUET 
+LOCATION '/creditBookDWH/analytics'
+;
+
+
+
+|-- user_id: string (nullable = true)
+|-- event_date: string (nullable = true)
+|-- category: string (nullable = true)
+|-- mobile_brand_name: string (nullable = true)
+|-- mobile_model_name: string (nullable = true)
+|-- mobile_os_hardware_model: string (nullable = true)
+|-- operating_system: string (nullable = true)
+|-- operating_system_version: string (nullable = true)
+|-- city: string (nullable = true)
+|-- country: string (nullable = true)
+|-- appversion: string (nullable = true)
+|-- processed_at: timestamp (nullable = true)
+|-- cryear: integer (nullable = true)
+|-- crmonth: integer (nullable = true)
+|-- crday: integer (nullable = true)
+
+create table IF NOT EXISTS creditbook_curatedlayer.analytics_details (
+    user_id STRING,
+    event_date STRING,
+    category STRING,
+    mobile_brand_name string,
+    mobile_model_name string,
+    mobile_os_hardware_model string,
+    operating_system string,
+    operating_system_version string,
+    city string,
+    country string,
+    appversion string,
+    processed_at timestamp,
+    cryear int,
+    crmonth int,
+    crday int);

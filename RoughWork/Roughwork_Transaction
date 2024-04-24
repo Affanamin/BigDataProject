@@ -1,0 +1,73 @@
+|-- transaction_id: string (nullable = true)
+|-- user_id: string (nullable = true)
+|-- business_id: string (nullable = true)
+|-- amount: string (nullable = true)
+|-- transaction_type: string (nullable = true)
+|-- type: string (nullable = true)
+|-- created_at: string (nullable = true)
+|-- cryear: integer (nullable = true)
+|-- crmonth: integer (nullable = true)
+|-- crday: integer (nullable = true)
+|-- processed_at: timestamp (nullable = true)
+
+CREATE EXTERNAL TABLE IF NOT EXISTS creditbook_sourcelayer.trans_details (
+    transaction_id STRING,
+    user_id STRING,
+    business_id STRING,
+    amount STRING,
+    transaction_type STRING,
+    type STRING,
+    created_at STRING,
+    processed_at timestamp
+    )
+partitioned by (cryear INT,crmonth INT,crday INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS PARQUET 
+LOCATION '/creditBookDWH/transactions'
+;
+
+
+
+Transaction Details:
+
+|-- user_id: string (nullable = true)
+|-- transaction_id: string (nullable = true)
+|-- business_id: string (nullable = true)
+|-- amount: string (nullable = true)
+|-- transaction_type: string (nullable = true)
+|-- type: string (nullable = true)
+|-- created_at: string (nullable = true)
+|-- processed_at: timestamp (nullable = true)
+|-- cryear: integer (nullable = true)
+|-- crmonth: integer (nullable = true)
+|-- crday: integer (nullable = true)
+
+|-- debit_count: long (nullable = true)
+|-- credit_count: long (nullable = true)
+|-- total_trans_count: long (nullable = true)
+|-- debitamount_inmillion: double (nullable = true)
+|-- creditamount_inmillion: double (nullable = true)
+|-- totaltransamount_inmillion: double (nullable = true)
+|-- processed_at: timestamp (nullable = true)
+
+create table IF NOT EXISTS creditbook_curatedlayer.trans_details (
+    user_id STRING,
+    transaction_id STRING,
+    business_id STRING,
+    amount string,
+    transaction_type string,
+    type string,
+    created_at string,
+    processed_at timestamp,
+    cryear integer,
+    crmonth integer,
+    crday integer,
+    trans_date string,
+    debit_count BIGINT,
+    credit_count BIGINT,
+    total_trans_count BIGINT,
+    debitamount_inmillion DOUBLE,
+    creditamount_inmillion DOUBLE,
+    totaltransamount_inmillion DOUBLE
+
+    );

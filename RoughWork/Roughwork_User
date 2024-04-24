@@ -1,0 +1,52 @@
+|-- user_id: string (nullable = true)
+|-- business_id: string (nullable = true)
+|-- rating: string (nullable = true)
+|-- created_at: string (nullable = true)
+|-- cryear: integer (nullable = true)
+|-- crmonth: integer (nullable = true)
+|-- crday: integer (nullable = true)
+|-- processed_at: timestamp (nullable = true)
+
+
+CREATE EXTERNAL TABLE IF NOT EXISTS creditbook_public.dateToday(
+    datetoday_pk INT,
+    todayday STRING,
+    todaymonth STRING,
+    todayyear STRING,
+    yesterdayDay STRING,
+    yesterDayMonth STRING,
+    yesterDayYear STRING
+);
+
+CREATE EXTERNAL TABLE IF NOT EXISTS creditbook_sourcelayer.user_details (
+    user_id STRING,
+    business_id STRING,
+    rating STRING,
+    created_at STRING,
+    processed_at timestamp
+    )
+partitioned by (cryear INT,crmonth INT,crday INT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY ',' 
+STORED AS PARQUET 
+LOCATION '/creditBookDWH/user'
+;
+
+|-- user_id: string (nullable = true)
+|-- business_id: string (nullable = true)
+|-- rating: string (nullable = true)
+|-- created_at: string (nullable = true)
+|-- processed_at: timestamp (nullable = true)
+|-- cryear: integer (nullable = true)
+|-- crmonth: integer (nullable = true)
+|-- crday: integer (nullable = true)
+
+create table IF NOT EXISTS creditbook_curatedlayer.user_details (
+    user_id STRING,
+    business_id STRING,
+    rating STRING,
+    created_at STRING,
+    processed_at timestamp,
+    signup_since_days INT,
+    cryear INT,
+    crmonth INT,
+    crday INT);

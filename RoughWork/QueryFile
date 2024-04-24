@@ -1,0 +1,10 @@
+select ccud.user_id, ccud.rating, ccud.signup_since_days,ccpf.gmv_per_month , ccpf.avgtranspermonth,
+npdd.trans_date,npdd.trans_year,npdd.trans_month,npdd.trans_quarter,npdd.trans_weekday,npdd.trans_dayname,npdd.trans_dayofmonth,
+cctd.amount, cctd.debit_count, cctd.credit_count, cctd.total_trans_count, cctd.debitamount_inmillion , cctd.creditamount_inmillion, cctd.totaltransamount_inmillion,
+ccad.category, ccad.mobile_brand_name, ccad.city, ccad.appversion
+from creditbook_consumplayer.profile_fact ccpf
+inner join creditbook_consumplayer.user_dim ccud on ccpf.user_id_fk = ccud.user_id_pk
+inner join creditbook_consumplayer.trans_dim cctd on ccpf.trans_id_fk = cctd.trans_id_pk
+inner join creditbook_consumplayer.date_dim npdd on ccpf.date_id_fk = npdd.date_id_pk
+inner join creditbook_consumplayer.analytics_dim ccad on ccpf.analytics_id_fk = ccad.analytics_id_pk
+limit 20;
