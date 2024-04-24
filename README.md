@@ -18,7 +18,12 @@ This project outlines the design and implementation of an end-to-end ETL pipelin
 
 3. Data is ingested from the client's provided URLs and stored in HDFS in Parquet format with Snappy compression. This approach ensures efficient storage and retrieval of data, with partitions created based on date and time for enhanced query performance. Apache Spark is leveraged for data ingestion, facilitating parallel processing and scalability.
 
-4. Layered Approach
+![Image Description](./etl_Images/1.png)
+![Image Description](./etl_Images/2.png)
+![Image Description](./etl_Images/3.png)
+![Image Description](./etl_Images/4.png)
+
+5. Layered Approach
 The ETL pipeline is structured into three layers:
 
 Source Layer:
@@ -31,15 +36,23 @@ The Curated Layer focuses on data transformation and preparation. Various transf
 Consumption Layer:
 The Consumption Layer is where the transformed data is modeled for analytics purposes. A star schema is implemented, comprising fact and dimensional tables. Surrogate keys and foreign keys are established to maintain relationships between dimension and fact tables. Aggregate data is incorporated into the fact table to facilitate efficient analytics. Separate internal Hive tables are created for each dimension and fact table, organized based on primary keys, surrogate keys, and foreign keys.
 
+![Image Description](./etl_Images/cons1.png)
+![Image Description](./etl_Images/cons2.png)
+
 5. Data Modeling
 The data modeling approach revolves around a star schema, which provides a structured and optimized data model for analytics. This schema consists of:
   .  Fact Table: Represents the core metrics of interest (e.g., transactions), containing surrogate keys and foreign keys to related dimension tables.
   .  Dimension Tables: Represent descriptive attributes (e.g., user details, date information), providing context to the facts. Each dimension table contains surrogate keys for efficient querying and joins.
 
-6. Apache Airflow Integration
+![Image Description](./etl_Images/6.png)
+![Image Description](./etl_Images/7.png)
+![Image Description](./etl_Images/8.png)
+![Image Description](./etl_Images/9.png)
+
+7. Apache Airflow Integration
 Apache Airflow is seamlessly integrated into the pipeline to orchestrate tasks and automate workflow execution. Directed Acyclic Graphs (DAGs) are created to define the workflow, ensuring tasks are executed sequentially or in parallel based on dependencies and schedules. This integration enhances pipeline reliability, scalability, and monitoring capabilities.
 
-7. Full Load and Incremental Load Mechanisms
+8. Full Load and Incremental Load Mechanisms
 Within the Spark code, a separate mechanism is implemented to handle both full load and incremental load scenarios. This mechanism allows for flexibility in data loading strategies based on the requirements:
 
   .  Full Load: When the ETL code is executed with the "FullLoad" parameter, the entire dataset is processed and loaded from one layer to another. This ensures that all data is transferred and refreshed, useful for periodic updates or initial data setup.
@@ -51,3 +64,10 @@ By implementing both full load and incremental load mechanisms, the ETL pipeline
 In conclusion, the implemented ETL pipeline fulfills the client's requirements for transforming and aggregating their production database into a usable format for the data team. The modular
 design, coupled with the use of scalable technologies, ensures the pipeline's efficiency, flexibility, and maintainability.
 
+![Image Description](./etl_Images/5.png)
+
+![Image Description](./etl_Images/10.png)
+
+![Image Description](./etl_Images/11.png)
+
+![Image Description](./etl_Images/12.png)
