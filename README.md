@@ -1,6 +1,8 @@
 # BigDataProject
 In this project I have created an end to end Big data ETL pipeline which comprised of Hadoop HDFS as storage layer, Apache Hive as Data warehouse, Apache spark as ETL engine, Apache airflow as data orchestration and presto for query analysis.
 
+![Image Description](./etl_Images/Mainpic.png)
+
 1. Introduction
 
 This project outlines the design and implementation of an end-to-end ETL pipeline enriched with Apache Airflow integration. The pipeline is architected using Python, SQL, and various Apache tools, catering to the data processing needs of our client, with a focus on scalability, efficiency, and maintainability.
